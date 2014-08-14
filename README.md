@@ -1,2 +1,2 @@
-mind-trainner
+mind-trainer
 =============
