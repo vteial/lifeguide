@@ -1,0 +1,65 @@
+<br/>
+<div>
+	<div class="col-md-6">
+		<form class="form well well-sm" x-role="form">
+		<fieldset>
+    		<legend>Add/Edit</legend>
+		<div class="form-group">
+		    <label for="name"><small>Title</small></label>
+		    <input type="text" class="form-control" 
+		    	id="name" placeholder="Video Name"
+		    	x-ng-model="item.name">
+		</div>		
+		<div class="form-group">
+		    <label for="videoUrl"><small>URL</small></label>
+		    <input type="url" class="form-control" 
+		    	id="videoUrl" placeholder="Video URL"
+		    	x-ng-model="item.videoUrl">
+		</div>		
+		<div class="form-group">
+		    <label for="videoId"><small>Id</small></label>
+		    <input type="text" class="form-control" 
+		    	id="videoId" placeholder="Video ID"
+		    	x-ng-model="item.videoId" disabled>
+		</div>
+		<div class="form-group">
+		    <label for="tags"><small>Tag</small></label>
+		    <input type="text" class="form-control" 
+		    	id="tag" placeholder="Tags"
+		    	x-ng-model="item.tags" disabled>
+		</div>
+		<div>
+			<div class="col-md-4 col-md-offset-1 text-center">
+				<button type="reset" 
+					class="btn btn-default btn-block" 
+					x-ng-click="resetItem()">
+					Reset
+				</button>
+			</div>
+			<div class="col-md-4 col-md-offset-2 text-center">
+				<button type="submit"
+					class="btn btn-primary btn-block" 
+					x-ng-click="addItem()">
+					Add
+				</button>
+			</div>
+		</div>
+		</fieldset>		
+		</form>
+	</div>
+	<div class="col-md-6">
+		<div class="form-group">
+			<label for="name"><small>Title</small></label>
+			<input type="text" class="form-control" 
+				id="name" placeholder="Name"
+				x-ng-model="item.name"/>
+		</div>
+		<div class="text-center">
+			<!--
+				player-width="'100%'" player-height="'300px'"
+			-->	
+			<x-youtube-video video-id="item.videoId">
+			</x-youtube-video>
+		</div>
+	</div>
+</div>

@@ -10,6 +10,7 @@ function rootController($scope, $log, $window, $sessionStorage) {
 appControllers.controller('rootController', rootController);
 
 var dependents = [ 'ngRoute', 'ngSanitize' ];
+dependents.push('youtube-embed');
 dependents.push('ngStorage');
 dependents.push('green.inputmask4angular');
 // dependents.push('ngInputDate');
@@ -39,6 +40,11 @@ app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/index', {
 		templateUrl : 'modules/home/index-d.html',
 		controller : 'indexController'
+	});
+
+	$routeProvider.when('/test', {
+		templateUrl : 'modules/test/test.html',
+		controller : 'testController'
 	});
 
 	$routeProvider.otherwise({
@@ -78,7 +84,7 @@ function appInit($log, $rootScope, $location, $sessionStorage) {
 
 	$rootScope.homeView = '/index';
 
-	$location.path('/index');
+	$location.path('/test');
 
 	$log.info('Initialization finished...');
 }
