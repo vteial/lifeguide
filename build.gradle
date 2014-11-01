@@ -15,6 +15,7 @@ repositories {
 	jcenter()
 }
 
+apply plugin: 'eclipse'
 apply plugin: 'war'
 apply plugin: 'gaelyk'
 apply plugin: 'appengine-geb'
