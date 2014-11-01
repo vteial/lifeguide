@@ -2,6 +2,7 @@ function rootController($scope, $log, $window, $sessionStorage) {
 	$scope.$storage = $sessionStorage;
 
 	$scope.viewSource = function() {
+		$log.info('viewSource....');
 		$window.open('view-source:' + $scope.currentViewSrcUrl);
 	};
 
@@ -42,7 +43,7 @@ app.config(function($routeProvider, $locationProvider) {
 		controller : 'indexController'
 	});
 
-	$routeProvider.when('/item', {
+	$routeProvider.when('/items', {
 		templateUrl : 'modules/item/item-d.html',
 		controller : 'itemController'
 	});
@@ -89,7 +90,7 @@ function appInit($log, $rootScope, $location, $sessionStorage) {
 
 	$rootScope.homeView = '/index';
 
-	$location.path('/test');
+	$location.path('/items');
 
 	$log.info('Initialization finished...');
 }

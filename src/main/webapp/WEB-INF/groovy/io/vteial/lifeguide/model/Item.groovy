@@ -15,7 +15,9 @@ public class Item {
 
 	String videoId
 
-	String videoUrl
+	Date createTime
+
+	Date updateTime;
 
 	public long getId() {
 		return id;
@@ -41,11 +43,19 @@ public class Item {
 		this.videoId = videoId;
 	}
 
-	public String getVideoUrl() {
-		return videoUrl;
+	public Date getCreateTime() {
+		return createTime;
 	}
 
-	public void setVideoUrl(String videoUrl) {
-		this.videoUrl = videoUrl;
+	public void setCreateTime(Date createTime) {
+		this.createTime = createTime;
+	}
+
+	public Date getUpdateTime() {
+		return updateTime;
+	}
+
+	public void setUpdateTime(Date updateTime) {
+		this.updateTime = updateTime;
 	}
 }

@@ -1,7 +1,6 @@
 appServices.factory('itemService', function($log, $rootScope, $http) {
 
 	var service = {
-		item : {},
 		items : [],
 		itemsMap : {}
 	};
@@ -14,6 +13,8 @@ appServices.factory('itemService', function($log, $rootScope, $http) {
 	service.init = init;
 
 	function reload() {
+		service.items.length = 0;
+		service.itemsMap = {};
 		$http.get('/items').success(function(itemsRes) {
 			for (var i = 0; i < itemsRes.length; i++) {
 				var item = itemsRes[i];
@@ -25,25 +26,45 @@ appServices.factory('itemService', function($log, $rootScope, $http) {
 	}
 	service.reload = reload;
 
-	function addOrEditItem() {
+	function createOrUpdateItem(item) {
 		var itemReq = {
-			name : service.item.name,
-			videoId : service.item.videoId,
-			videoUrl : service.item.videoUrl,
+			name : item.name,
+			videoId : item.videoId,
 		};
-		$http.post('/items/item', itemReq).success(function(itemRes) {
-			var item = service.itemsMap[itemRes.id]
-			if (item) {
-				item.name = itemRes.name;
-				item.videoId = itemRes.videoId;
-				item.videoUrl = itemRes.videoUrl;
-			} else {
-				service.items.push(itemRes);
-				service.itemsMap[itemRes.id] = itemRes;
-			}
+		if (item.id === 0) {
+			var path = '/items/item';
+			$http.post(path, itemReq).success(function(itemRes) {
+				updateCache(itemRes);
+			});
+		} else {
+			itemReq.id = item.id
+			var path = '/items/item/' + itemReq.id;
+			$http.put(path, itemReq).success(function(itemRes) {
+				updateCache(itemRes);
+			});
+		}
+	}
+	service.createOrUpdateItem = createOrUpdateItem;
+
+	function deleteItem(item) {
+		var path = '/items/item/' + item.id;
+		$http['delete'](path).success(function(itemId) {
+			$log.info(itemId);
+			delete service.itemsMap[itemId]
 		});
 	}
-	service.addOrEditItem = addOrEditItem;
+	service.deleteItem = deleteItem;
+
+	function updateCache(itemx) {
+		var item = service.itemsMap[itemx.id]
+		if (item) {
+			item.name = itemx.name;
+			item.videoId = itemx.videoId;
+		} else {
+			service.items.push(itemx);
+			service.itemsMap[itemx.id] = itemx;
+		}
+	}
 
 	return service;
 });
