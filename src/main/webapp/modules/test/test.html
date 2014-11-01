@@ -1,5 +1,5 @@
 <br/>
-<div>
+<div class="row">
 	<div class="col-md-6">
 		<form class="form well well-sm" x-role="form">
 		<fieldset>
@@ -63,6 +63,9 @@
 		</form>
 	</div>
 	<div class="col-md-6">
+		<pre>Total : {{items.length}}</pre>
+		<pre>{{items | json}}</pre>
+		<!-- 
 		<div class="form-group">
 			<label for="name"><small>Title</small></label>
 			<input type="text" class="form-control" 
@@ -70,11 +73,15 @@
 				x-ng-model="item.name"/>
 		</div>
 		<div class="text-center">
-			<!--
-				player-width="'100%'" player-height="'300px'"
-			-->	
-			<x-youtube-video video-id="item.videoId">
+			<x-youtube-video video-id="item.videoId"
+				player-width="'100%'" player-height="'300px'">
 			</x-youtube-video>
 		</div>
+		-->
 	</div>
 </div>
+
+<div class="row">
+	<pre>{{item.message | json}}</pre>
+</div>
+

@@ -28,17 +28,21 @@ appengine {
 	httpPort = 8181
 
 	appcfg {
-		email = "vteial@gmail.com"
+		email = 'vteial@gmail.com'
 		noCookies = true
 		oauth2 = true
 	}
 }
 
 dependencies {
-	def gaeVersion = '1.9.4'
+	def jacksonVersion = '2.4.3'
 	def groovyVersion = '2.3.7'
+	def gaeVersion = '1.9.4'
 
-	compile "org.codehaus.groovy:groovy-all:${groovyVersion}"
+	compile "com.fasterxml.jackson.core:jackson-core:$jacksonVersion"
+	compile "com.fasterxml.jackson.core:jackson-databind:$jacksonVersion"
+	compile "com.fasterxml.jackson.core:jackson-annotations:$jacksonVersion"
+	compile "org.codehaus.groovy:groovy-all:$groovyVersion"
 
 	compile "com.google.appengine:appengine-api-1.0-sdk:$gaeVersion",
 			"com.google.appengine:appengine-api-labs:$gaeVersion"
