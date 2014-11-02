@@ -6,29 +6,31 @@ function itemController($rootScope, $scope, $log, itemService) {
 		videoUrl : '',
 		videoId : '',
 		name : ''
-	}, itemIndex = -1, query = '';
+	}, itemIndex = -1;
 	$scope.item = item;
 	$scope.itemIndex = itemIndex
 
-	// item = {
-	// id : 0,
-	// videoUrl : 'http://www.youtube.com/v/bBV9mzPSreU',
-	// videoId : 'bBV9mzPSreU',
-	// name : 'Introduction of Anatomic Therapy'
-	// };
-	// $scope.item = item;
+	$scope.dropdownStatus = false;
+
+	item = {
+		id : 0,
+		videoUrl : 'http://www.youtube.com/v/bBV9mzPSreU',
+		videoId : 'bBV9mzPSreU',
+		name : 'Introduction of Anatomic Therapy'
+	};
+	$scope.item = item;
 
 	$scope.items = itemService.items;
 
 	$scope.refreshItems = itemService.reload;
 
-	$scope.editItem = function(item) {
-		$scope.item = item;
-	};
-
 	$scope.onItemSelect = function(index) {
 		$scope.itemIndex = index;
-		$scope.item = $scope.items[index];
+		if (index == -1) {
+			$scope.item = item;
+		} else {
+			$scope.item = $scope.items[index];
+		}
 	}
 
 	$scope.createOrUpdateItem = function() {
@@ -36,7 +38,15 @@ function itemController($rootScope, $scope, $log, itemService) {
 	};
 
 	$scope.deleteItem = function() {
-		itemService.deleteItem($scope.item);
+		$scope.dropdownStatus = false;
+		var index = $scope.itemIndex - 1;
+		if (index < 0 && $scope.items.length > 1) {
+			index += 1;
+		}
+		itemService.deleteItem($scope.item).then(function(itemId) {
+			$log.info('index = ' + index);
+			$scope.onItemSelect(index);
+		});
 	}
 
 	$scope.resetItem = function() {

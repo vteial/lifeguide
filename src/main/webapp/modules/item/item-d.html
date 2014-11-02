@@ -70,12 +70,27 @@
 			    <code>{{item.id}}</code>
 			</div>
 			<div class="col-md-6 text-right">
+				<div class="col-md-3">
+					<div class="btn-group" dropdown is-open="dropdownStatus">
+	      				<button type="button" 
+	      					class="btn btn-danger btn-xs dropdown-toggle" 
+	      					x-ng-disabled="item.id == 0">
+	        				Delete <span class="caret"></span>
+	      				</button>
+						<ul class="dropdown-menu" role="menu">
+					        <li><a href="" x-ng-click="deleteItem()"> Proceed to delete...</a></li>
+						</ul>
+	    			</div>
+    			</div>
+    			<div class="col-md-3">&nbsp;&nbsp;&nbsp;</div>
+				<!-- 
 				<button type="submit"
 					class="btn btn-danger btn-xs"
 					x-ng-disabled="item.id == 0" 
 					x-ng-click="deleteItem()">
 					<i class="fa fa-times"></i> Delete
 				</button>
+				-->
 			</div>
 		</div>
 		<div>&nbsp;</div>

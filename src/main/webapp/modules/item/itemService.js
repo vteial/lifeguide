@@ -1,4 +1,4 @@
-function itemService($log, $http, bootstrapNotifyService) {
+function itemService($log, $q, $http, bootstrapNotifyService) {
 
 	var wydNotifyService = bootstrapNotifyService;
 
@@ -53,11 +53,14 @@ function itemService($log, $http, bootstrapNotifyService) {
 	service.createOrUpdateItem = createOrUpdateItem;
 
 	function deleteItem(item) {
+		var deferred = $q.defer();
+
 		var path = '/items/item/' + item.id;
 		$http['delete'](path).success(function(itemId) {
 			// $log.info(itemId);
 			var msg = 'Item \'' + itemId + '\' deleted successfully';
-			wydNotifyService.addSuccess(msg);
+			wydNotifyService.addInfo(msg);
+
 			delete service.itemsMap[itemId]
 			var items = _.reject(service.items, function(citem) {
 				return citem.id === item.id;
@@ -67,7 +70,11 @@ function itemService($log, $http, bootstrapNotifyService) {
 			_.each(items, function(citem) {
 				service.items.push(citem);
 			});
+
+			deferred.resolve(itemId);
 		});
+
+		return deferred.promise;
 	}
 	service.deleteItem = deleteItem;
 
