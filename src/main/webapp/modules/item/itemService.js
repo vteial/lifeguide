@@ -1,4 +1,6 @@
-appServices.factory('itemService', function($log, $rootScope, $http) {
+function itemService($log, $http, bootstrapNotifyService) {
+
+	var wydNotifyService = bootstrapNotifyService;
 
 	var service = {
 		items : [],
@@ -35,12 +37,16 @@ appServices.factory('itemService', function($log, $rootScope, $http) {
 			var path = '/items/item';
 			$http.post(path, itemReq).success(function(itemRes) {
 				updateCache(itemRes);
+				var msg = 'Item \'' + itemRes.id + '\' saved successfully';
+				wydNotifyService.addSuccess(msg);
 			});
 		} else {
 			itemReq.id = item.id
 			var path = '/items/item/' + itemReq.id;
 			$http.put(path, itemReq).success(function(itemRes) {
 				updateCache(itemRes);
+				var msg = 'Item \'' + itemRes.id + '\' saved successfully';
+				wydNotifyService.addSuccess(msg);
 			});
 		}
 	}
@@ -49,8 +55,18 @@ appServices.factory('itemService', function($log, $rootScope, $http) {
 	function deleteItem(item) {
 		var path = '/items/item/' + item.id;
 		$http['delete'](path).success(function(itemId) {
-			$log.info(itemId);
+			// $log.info(itemId);
+			var msg = 'Item \'' + itemId + '\' deleted successfully';
+			wydNotifyService.addSuccess(msg);
 			delete service.itemsMap[itemId]
+			var items = _.reject(service.items, function(citem) {
+				return citem.id === item.id;
+			});
+			// $log.info(items);
+			service.items.length = 0;
+			_.each(items, function(citem) {
+				service.items.push(citem);
+			});
 		});
 	}
 	service.deleteItem = deleteItem;
@@ -67,4 +83,5 @@ appServices.factory('itemService', function($log, $rootScope, $http) {
 	}
 
 	return service;
-});
+}
+appServices.factory('itemService', itemService);

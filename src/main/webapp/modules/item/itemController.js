@@ -10,6 +10,14 @@ function itemController($rootScope, $scope, $log, itemService) {
 	$scope.item = item;
 	$scope.itemIndex = itemIndex
 
+	// item = {
+	// id : 0,
+	// videoUrl : 'http://www.youtube.com/v/bBV9mzPSreU',
+	// videoId : 'bBV9mzPSreU',
+	// name : 'Introduction of Anatomic Therapy'
+	// };
+	// $scope.item = item;
+
 	$scope.items = itemService.items;
 
 	$scope.refreshItems = itemService.reload;

@@ -28,6 +28,10 @@ app.config(function(uiSelectConfig) {
 	uiSelectConfig.theme = 'select2';
 });
 
+app.config(function($httpProvider) {
+	$httpProvider.interceptors.push('generalHttpInterceptor');
+});
+
 app.config(function($routeProvider, $locationProvider) {
 	$routeProvider.when('/', {
 		templateUrl : 'modules/home/index-d.html',
