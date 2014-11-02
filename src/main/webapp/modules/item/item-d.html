@@ -63,34 +63,17 @@
 	<div class="col-md-4">
 		<form class="form well well-sm" x-role="form">
 		<fieldset>
-    		<legend>Add/Edit</legend>
 		<div>
 			<div class="col-md-6">
 			    <label><small>Id</small></label>
 			    <code>{{item.id}}</code>
 			</div>
 			<div class="col-md-6 text-right">
-				<div class="col-md-3">
-					<div class="btn-group" dropdown is-open="dropdownStatus">
-	      				<button type="button" 
-	      					class="btn btn-danger btn-xs dropdown-toggle" 
-	      					x-ng-disabled="item.id == 0">
-	        				Delete <span class="caret"></span>
-	      				</button>
-						<ul class="dropdown-menu" role="menu">
-					        <li><a href="" x-ng-click="deleteItem()"> Proceed to delete...</a></li>
-						</ul>
-	    			</div>
-    			</div>
-    			<div class="col-md-3">&nbsp;&nbsp;&nbsp;</div>
-				<!-- 
-				<button type="submit"
-					class="btn btn-danger btn-xs"
-					x-ng-disabled="item.id == 0" 
-					x-ng-click="deleteItem()">
-					<i class="fa fa-times"></i> Delete
+				<button type="button" 
+					class="btn btn-default btn-sm" 
+					x-ng-click="newItem()">
+					<i class="fa fa-plus"></i> New
 				</button>
-				-->
 			</div>
 		</div>
 		<div>&nbsp;</div>
@@ -121,18 +104,30 @@
 		    	x-ng-model="item.tags" disabled>
 		</div>
 		<div>
-			<div class="col-md-4 col-md-offset-1 text-center">
+			<div class="col-md-4">
+				<div class="btn-group" dropdown is-open="dropdownStatus">
+      				<button type="button" 
+      					class="btn btn-danger dropdown-toggle" 
+      					x-ng-disabled="item.id == 0">
+        				<i class="fa fa-times"></i> Delete <span class="caret"></span>
+      				</button>
+					<ul class="dropdown-menu" role="menu">
+				        <li><a href="" x-ng-click="deleteItem()"> Proceed to delete...</a></li>
+					</ul>
+    			</div>
+			</div>
+			<div class="col-md-4 text-center">
 				<button type="button" 
-					class="btn btn-default btn-block" 
+					class="btn btn-default" 
 					x-ng-click="resetItem()">
-					New
+					Reset
 				</button>
 			</div>
-			<div class="col-md-4 col-md-offset-2 text-center">
+			<div class="col-md-4 text-right">
 				<button type="button"
-					class="btn btn-primary btn-block" 
+					class="btn btn-primary" 
 					x-ng-click="createOrUpdateItem()">
-					Save
+					<i class="fa fa-save"></i> Save
 				</button>
 			</div>
 		</div>

@@ -1,5 +1,7 @@
-function itemController($rootScope, $scope, $log, wydFocusService, itemService,
-		youtubeEmbedUtils) {
+function itemController($rootScope, $scope, $log, bootstrapNotifyService,
+		wydFocusService, itemService, youtubeEmbedUtils) {
+	var wydNotifyService = bootstrapNotifyService;
+
 	$rootScope.viewName = 'Items';
 
 	var defaultItem = {
@@ -53,10 +55,15 @@ function itemController($rootScope, $scope, $log, wydFocusService, itemService,
 		});
 	}
 
-	function resetItem() {
+	function newItem() {
 		$scope.itemIndex = -1;
 		$scope.item = _.assign({}, defaultItem);
 		wydFocusService('itemNameFocus');
+	}
+	$scope.newItem = newItem;
+
+	function resetItem() {
+		wydNotifyService.addInfo('Not yet implemented...');
 	}
 	$scope.resetItem = resetItem;
 
