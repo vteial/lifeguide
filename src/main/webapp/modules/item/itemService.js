@@ -29,6 +29,8 @@ function itemService($log, $q, $http, bootstrapNotifyService) {
 	service.reload = reload;
 
 	function createOrUpdateItem(item) {
+		var deferred = $q.defer();
+
 		var itemReq = {
 			name : item.name,
 			videoId : item.videoId,
@@ -39,6 +41,7 @@ function itemService($log, $q, $http, bootstrapNotifyService) {
 				updateCache(itemRes);
 				var msg = 'Item \'' + itemRes.id + '\' saved successfully';
 				wydNotifyService.addSuccess(msg);
+				deferred.resolve(itemRes);
 			});
 		} else {
 			itemReq.id = item.id
@@ -47,8 +50,11 @@ function itemService($log, $q, $http, bootstrapNotifyService) {
 				updateCache(itemRes);
 				var msg = 'Item \'' + itemRes.id + '\' saved successfully';
 				wydNotifyService.addSuccess(msg);
+				deferred.resolve(itemRes);
 			});
 		}
+
+		return deferred.promise;
 	}
 	service.createOrUpdateItem = createOrUpdateItem;
 

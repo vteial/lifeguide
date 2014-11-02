@@ -2,24 +2,16 @@ function itemController($rootScope, $scope, $log, wydFocusService, itemService,
 		youtubeEmbedUtils) {
 	$rootScope.viewName = 'Items';
 
-	var item = {
+	var defaultItem = {
 		id : 0,
 		videoUrl : '',
 		videoId : '',
 		name : ''
 	}, itemIndex = -1;
-	$scope.item = item;
+	$scope.item = _.assign({}, defaultItem);
 	$scope.itemIndex = itemIndex
 
 	$scope.dropdownStatus = false;
-
-	// item = {
-	// id : 0,
-	// videoUrl : 'http://www.youtube.com/v/bBV9mzPSreU',
-	// videoId : 'bBV9mzPSreU',
-	// name : 'Introduction of Anatomic Therapy'
-	// };
-	// $scope.item = item;
 
 	$scope.items = itemService.items;
 
@@ -28,21 +20,24 @@ function itemController($rootScope, $scope, $log, wydFocusService, itemService,
 	$scope.onItemSelect = function(index) {
 		$scope.itemIndex = index;
 		if (index == -1) {
-			$scope.item = item;
+			$scope.item = _.assign({}, defaultItem);
 		} else {
 			$scope.item = $scope.items[index];
 		}
 	}
 
 	$scope.parseVideoId = function() {
-		$log.info('parseVideoId');
-		$scope.item.videoId = youtubeEmbedUtils
-				.getIdFromURL($scope.item.videoUrl);
+		var videoId = youtubeEmbedUtils.getIdFromURL($scope.item.videoUrl);
+		$scope.item.videoId = videoId;
 	};
 
 	$scope.createOrUpdateItem = function() {
-		itemService.createOrUpdateItem($scope.item);
-		wydFocusService('itemNameFocus');
+		var itemId = $scope.item.id;
+		itemService.createOrUpdateItem($scope.item).then(function(itemRes) {
+			if (itemId === 0) {
+				resetItem();
+			}
+		});
 	};
 
 	$scope.deleteItem = function() {
@@ -58,9 +53,12 @@ function itemController($rootScope, $scope, $log, wydFocusService, itemService,
 		});
 	}
 
-	$scope.resetItem = function() {
-		$scope.item = item;
-	};
+	function resetItem() {
+		$scope.itemIndex = -1;
+		$scope.item = _.assign({}, defaultItem);
+		wydFocusService('itemNameFocus');
+	}
+	$scope.resetItem = resetItem;
 
 	itemService.init();
 
