@@ -1,4 +1,5 @@
-function itemController($rootScope, $scope, $log, itemService) {
+function itemController($rootScope, $scope, $log, wydFocusService, itemService,
+		youtubeEmbedUtils) {
 	$rootScope.viewName = 'Items';
 
 	var item = {
@@ -12,13 +13,13 @@ function itemController($rootScope, $scope, $log, itemService) {
 
 	$scope.dropdownStatus = false;
 
-	item = {
-		id : 0,
-		videoUrl : 'http://www.youtube.com/v/bBV9mzPSreU',
-		videoId : 'bBV9mzPSreU',
-		name : 'Introduction of Anatomic Therapy'
-	};
-	$scope.item = item;
+	// item = {
+	// id : 0,
+	// videoUrl : 'http://www.youtube.com/v/bBV9mzPSreU',
+	// videoId : 'bBV9mzPSreU',
+	// name : 'Introduction of Anatomic Therapy'
+	// };
+	// $scope.item = item;
 
 	$scope.items = itemService.items;
 
@@ -33,8 +34,15 @@ function itemController($rootScope, $scope, $log, itemService) {
 		}
 	}
 
+	$scope.parseVideoId = function() {
+		$log.info('parseVideoId');
+		$scope.item.videoId = youtubeEmbedUtils
+				.getIdFromURL($scope.item.videoUrl);
+	};
+
 	$scope.createOrUpdateItem = function() {
 		itemService.createOrUpdateItem($scope.item);
+		wydFocusService('itemNameFocus');
 	};
 
 	$scope.deleteItem = function() {
@@ -46,6 +54,7 @@ function itemController($rootScope, $scope, $log, itemService) {
 		itemService.deleteItem($scope.item).then(function(itemId) {
 			$log.info('index = ' + index);
 			$scope.onItemSelect(index);
+			wydFocusService('itemNameFocus');
 		});
 	}
 

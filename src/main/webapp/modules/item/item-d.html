@@ -98,13 +98,15 @@
 		    <label for="name"><small>Title</small></label>
 		    <input type="text" class="form-control" 
 		    	id="name" placeholder="Video Name"
+				x-wyd-focus-on="itemNameFocus"		    	
 		    	x-ng-model="item.name">
 		</div>		
 		<div class="form-group">
 		    <label for="videoUrl"><small>URL</small></label>
 		    <input type="url" class="form-control" 
 		    	id="videoUrl" placeholder="Video URL"
-		    	x-ng-model="item.videoUrl">
+		    	x-ng-model="item.videoUrl"
+		    	x-ng-blur="parseVideoId()">
 		</div>		
 		<div class="form-group">
 		    <label for="videoId"><small>Id</small></label>
