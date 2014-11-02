@@ -52,6 +52,11 @@ app.config(function($routeProvider, $locationProvider) {
 		controller : 'itemController'
 	});
 
+	$routeProvider.when('/init', {
+		templateUrl : 'modules/init/init-d.html',
+		controller : 'initController'
+	});
+
 	$routeProvider.when('/test', {
 		templateUrl : 'modules/test/test.html',
 		controller : 'testController'
