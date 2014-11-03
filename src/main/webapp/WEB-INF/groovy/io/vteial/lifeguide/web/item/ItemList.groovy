@@ -1,3 +1,4 @@
+package io.vteial.lifeguide.web.item
 import io.vteial.lifeguide.model.Item
 
 import com.fasterxml.jackson.databind.ObjectMapper
