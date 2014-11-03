@@ -9,7 +9,9 @@ import org.jsoup.select.Elements
 def content = [:]
 content.items = []
 try {
-	URL url = new URL('http://localhost:9090/temp-share/parseData.html')
+	String s = 'http://anatomictherapy.org/defect-cured-video.php'
+	//s = 'http://localhost:9090/temp-share/parseData.html'
+	URL url = new URL(s)
 	def response = url.get()
 	Document document = Jsoup.parse(response.text)
 	Element e0 = document.body()
