@@ -13,7 +13,7 @@ try {
 		s += request.localAddr + ':' + request.localPort
 	}
 	s += '/init/parseItem'
-	println s
+	//println s
 
 	URL url = new URL(s)
 	def response = url.get()
@@ -49,4 +49,3 @@ catch(Throwable t) {
 	t.printStackTrace(out)
 }
 
-println 'done...'

@@ -5,12 +5,13 @@ import org.jsoup.nodes.Document
 import org.jsoup.nodes.Element
 import org.jsoup.select.Elements
 
-
 def content = [:]
 content.items = []
 try {
 	String s = 'http://anatomictherapy.org/defect-cured-video.php'
-	//s = 'http://localhost:9090/temp-share/parseData.html'
+	if(params.parseUrl) {
+		s = params.parseUrl
+	}
 	URL url = new URL(s)
 	def response = url.get()
 	Document document = Jsoup.parse(response.text)

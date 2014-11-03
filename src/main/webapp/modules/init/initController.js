@@ -16,12 +16,14 @@ function initController($rootScope, $scope, $log, bootstrapNotifyService,
 	};
 
 	$scope.itemParse = {
+		url : 'http://localhost:9090/temp-share/parseData.html',
 		content : ''
 	};
 
 	$scope.parseItem = function() {
 		$log.info('parseItem...');
-		$http.get('/init/parseItem').success(function(response) {
+		var path = '/init/parseItem?parseUrl=' + $scope.itemParse.url;
+		$http.get(path).success(function(response) {
 			$scope.itemParse.content = response;
 		});
 	};
