@@ -99,7 +99,11 @@ function appInit($log, $rootScope, $location, $sessionStorage) {
 
 	$rootScope.homeView = '/index';
 
-	$location.path('/items');
+	var path = $sessionStorage.currentLocationPath;
+	if (!path) {
+		path = '/home';
+	}
+	$location.path(path);
 
 	$log.info('Initialization finished...');
 }

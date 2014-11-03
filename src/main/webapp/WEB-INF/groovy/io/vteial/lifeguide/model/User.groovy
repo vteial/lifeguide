@@ -11,17 +11,17 @@ import groovyx.gaelyk.datastore.Key
 public class User {
 
 	@Key
-	private String userId;
+	String userId;
 
-	private String password;
+	String password;
 
-	private String emailId;
+	String emailId;
 
-	private String status;
+	String status;
 
-	private String firstName;
+	String firstName;
 
-	private String lastName;
+	String lastName;
 
 	Date createTime
 

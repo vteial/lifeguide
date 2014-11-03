@@ -3,7 +3,9 @@ get '/favicon.ico', redirect : '/assets/favicon.png'
 all '/_ah/warmup', forward : '/ping.groovy'
 
 // init
-get '/init/initUser', forward : '/io/vteial/lifeguide/web/init/initUser.groovy'
+get '/init/initUser',  forward : '/io/vteial/lifeguide/web/init/initUser.groovy'
+get '/init/parseItem', forward : '/io/vteial/lifeguide/web/init/parseItem.groovy'
+get '/init/initItem',  forward : '/io/vteial/lifeguide/web/init/initItem.groovy'
 
 // security
 get  '/security/t',            forward : '/io/vteial/lifeguide/web/security/t.groovy'

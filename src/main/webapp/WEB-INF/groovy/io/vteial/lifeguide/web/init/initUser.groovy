@@ -1,10 +1,11 @@
 package io.vteial.lifeguide.web.init
+
 import io.vteial.lifeguide.model.User
 
 User user = User.get('vteial')
 Date now = new Date()
 datastore.withTransaction {
-	if(user) {
+	if(!user) {
 		user = new User()
 		user.userId = 'vteial'
 	}
@@ -17,5 +18,13 @@ datastore.withTransaction {
 	user.updateTime = now
 	user.save()
 }
+
+//println User.findAll {  where firstName == 'Eialarasu' }
+def entities = datastore.execute {
+	from 'User'
+	where firstName == 'Eialarasu'
+	limit 1
+}
+println entities
 
 println 'Successfully initialized...'
