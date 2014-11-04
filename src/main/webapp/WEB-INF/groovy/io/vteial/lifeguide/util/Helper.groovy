@@ -5,9 +5,10 @@ import javax.servlet.http.HttpServletRequest
 public class Helper {
 
 	public static String getDomainPrefix(def request, def app) {
-		String s = 'http://'
+		String appEnvName = app.env.name
 
-		if(app.env.name == 'Production') {
+		String s = 'http://'
+		if(appEnvName.equals('Production')) {
 			s += app.id + '.appspot.com'
 		}
 		else {

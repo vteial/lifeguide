@@ -62,6 +62,11 @@ app.config(function($routeProvider, $locationProvider) {
 		controller : 'initController'
 	});
 
+	$routeProvider.when('/info', {
+		templateUrl : 'modules/info/info.html',
+		controller : 'infoController'
+	});
+
 	$routeProvider.when('/test', {
 		templateUrl : 'modules/test/test.html',
 		controller : 'testController'

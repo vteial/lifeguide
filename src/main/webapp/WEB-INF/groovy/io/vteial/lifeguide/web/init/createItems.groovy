@@ -33,7 +33,12 @@ try {
 			itemE.createTime = now
 			itemE.updateTime = now
 		}
-		itemE.name = itemJson.name
+		String itemName = itemJson.name
+		int index = itemName.indexOf(' ')
+		if(index > 0) {
+			itemName = itemName.substring(index+1)
+		}
+		itemE.name = itemName
 		datastore.withTransaction { itemE.save() }
 		println itemE
 		println '-------------------'

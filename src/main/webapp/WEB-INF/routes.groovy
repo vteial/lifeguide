@@ -3,6 +3,7 @@ get '/favicon.ico', redirect : '/assets/favicon.png'
 all '/_ah/warmup', forward : '/ping.groovy'
 
 // data
+get '/init/info',			forward : '/io/vteial/lifeguide/web/init/info.groovy'
 get '/init/createAll',		forward : '/io/vteial/lifeguide/web/init/createAll.groovy'
 get '/init/deleteAll',   	forward : '/io/vteial/lifeguide/web/init/deleteAll.groovy'
 get '/init/createUsers', 	forward : '/io/vteial/lifeguide/web/init/createUsers.groovy'
