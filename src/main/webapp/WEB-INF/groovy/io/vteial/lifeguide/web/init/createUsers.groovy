@@ -18,13 +18,4 @@ datastore.withTransaction {
 	user.updateTime = now
 	user.save()
 }
-
-//println User.findAll {  where firstName == 'Eialarasu' }
-def entities = datastore.execute {
-	from 'User'
-	where firstName == 'Eialarasu'
-	limit 1
-}
-println entities
-
-println 'Successfully initialized...'
+println 'Users created...'

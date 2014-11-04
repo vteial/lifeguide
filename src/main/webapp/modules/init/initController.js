@@ -4,38 +4,52 @@ function initController($rootScope, $scope, $log, bootstrapNotifyService,
 
 	$rootScope.viewName = 'Init';
 
-	$scope.userInit = {
+	$scope.parseOutput = {
+		url : 'http://localhost:9090/temp-share/parseItems.html',
 		content : ''
 	};
 
-	$scope.initUser = function() {
-		$log.info('initUser...');
-		$http.get('/init/initUser').success(function(response) {
-			$scope.userInit.content = response;
-		});
-	};
-
-	$scope.itemParse = {
-		url : 'http://localhost:9090/temp-share/parseData.html',
-		content : ''
-	};
-
-	$scope.parseItem = function() {
-		$log.info('parseItem...');
-		var path = '/init/parseItem?parseUrl=' + $scope.itemParse.url;
+	$scope.parseItems = function() {
+		$log.info('parseItems...');
+		var path = '/init/parseItems?parseUrl=' + $scope.parseOutput.url;
 		$http.get(path).success(function(response) {
-			$scope.itemParse.content = response;
+			$scope.parseOutput.content = response;
 		});
 	};
 
-	$scope.itemInit = {
+	$scope.generalOutput = {
 		content : ''
 	};
 
-	$scope.initItem = function() {
-		$log.info('initItem...');
-		$http.get('/init/initItem').success(function(response) {
-			$scope.itemInit.content = response;
+	$scope.createUsers = function() {
+		$log.info('createUsers...');
+		$http.get('/init/createUsers').success(function(response) {
+			$scope.generalOutput.content = response;
+		});
+	};
+
+	$scope.createItems = function() {
+		$log.info('createItems...');
+		$http.get('/init/createItems').success(function(response) {
+			$scope.generalOutput.content = response;
+		});
+	};
+
+	$scope.allOutput = {
+		content : ''
+	};
+
+	$scope.createAll = function() {
+		$log.info('createAll...');
+		$http.get('/init/createAll').success(function(response) {
+			$scope.allOutput.content = response;
+		});
+	};
+
+	$scope.deleteAll = function() {
+		$log.info('deleteAll...');
+		$http.get('/init/deleteAll').success(function(response) {
+			$scope.allOutput.content = response;
 		});
 	};
 

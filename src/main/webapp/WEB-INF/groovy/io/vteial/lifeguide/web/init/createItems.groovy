@@ -3,20 +3,14 @@ package io.vteial.lifeguide.web.init
 import groovy.json.JsonParserType
 import groovy.json.JsonSlurper
 import io.vteial.lifeguide.model.Item
+import io.vteial.lifeguide.util.Helper
 
 try {
-	String s = 'http://'
-	if(app.env.name == 'Production') {
-		s += app.id + '.appspot.com'
-	}
-	else {
-		s += request.localAddr + ':' + request.localPort
-	}
-	s += '/init/parseItem'
-	//println s
+	String domainPerfix = Helper.getDomainPrefix(request, app)
+	String s = domainPerfix + '/init/parseItems'
+	println s
 
-	URL url = new URL(s)
-	def response = url.get()
+	def response = (new URL(s)).get()
 	//println response.text
 	def jsonSlurper = new JsonSlurper(type: JsonParserType.INDEX_OVERLAY)
 	def itemsJson = jsonSlurper.parseText(response.text)
@@ -29,7 +23,7 @@ try {
 			from 'Item'
 			where videoId == itemJson.videoId
 		}
-		println entities
+		//println entities
 		if(entities.size() > 0) {
 			itemE = entities[0] as Item
 			itemE.updateTime = now
@@ -44,6 +38,7 @@ try {
 		println itemE
 		println '-------------------'
 	}
+	println 'Items created...'
 }
 catch(Throwable t) {
 	t.printStackTrace(out)

@@ -47,13 +47,18 @@ app.config(function($routeProvider, $locationProvider) {
 		controller : 'indexController'
 	});
 
+	$routeProvider.when('/home', {
+		templateUrl : 'modules/home/index-d.html',
+		controller : 'indexController'
+	});
+
 	$routeProvider.when('/items', {
 		templateUrl : 'modules/item/item-d.html',
 		controller : 'itemController'
 	});
 
 	$routeProvider.when('/init', {
-		templateUrl : 'modules/init/init-d.html',
+		templateUrl : 'modules/init/init.html',
 		controller : 'initController'
 	});
 

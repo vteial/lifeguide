@@ -9,11 +9,10 @@ def content = [:]
 content.items = []
 try {
 	String s = 'http://anatomictherapy.org/defect-cured-video.php'
-	if(params.parseUrl) {
+	if(params.parseUrl != null && params.parseUrl != '') {
 		s = params.parseUrl
 	}
-	URL url = new URL(s)
-	def response = url.get()
+	def response = (new URL(s)).get()
 	Document document = Jsoup.parse(response.text)
 	Element e0 = document.body()
 	Elements es0 = e0.getElementsByAttributeValue('class', 'container')
