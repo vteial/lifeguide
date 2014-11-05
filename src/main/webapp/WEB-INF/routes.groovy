@@ -1,9 +1,17 @@
-get '/favicon.ico', redirect : '/assets/favicon.png'
+email	to : '/receiveEmail.groovy'
 
-all '/_ah/warmup', forward : '/ping.groovy'
+jabber	chat,	 		to : '/receiveJabberMessage.groovy'
+jabber 	presence,		to : '/receiveJabberpresence.groovy'
+jabber	subscription, 	to : '/receiveJabberSubscription.groovy'
 
+get 	'/info',		forward  : '/info.groovy'
+get 	'/favicon.ico',	redirect : '/assets/favicon.png'
+
+all 	'/_ah/warmup',	forward : '/ping.groovy'
+
+// cron
+get '/cron/dailyBackup',	forward : '/cron/dailyBackup.groovy'
 // data
-get '/init/info',			forward : '/io/vteial/lifeguide/web/init/info.groovy'
 get '/init/createAll',		forward : '/io/vteial/lifeguide/web/init/createAll.groovy'
 get '/init/deleteAll',   	forward : '/io/vteial/lifeguide/web/init/deleteAll.groovy'
 get '/init/createUsers', 	forward : '/io/vteial/lifeguide/web/init/createUsers.groovy'

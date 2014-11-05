@@ -6,7 +6,7 @@ function infoController($rootScope, $scope, $log, $http) {
 	};
 
 	function refresh() {
-		$http.get('init/info').success(function(response) {
+		$http.get('/info').success(function(response) {
 			$log.info('refresh...');
 			$scope.info.content = response;
 		});

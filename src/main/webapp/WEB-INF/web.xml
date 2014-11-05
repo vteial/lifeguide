@@ -57,10 +57,17 @@
 		incoming email endpoint -->
 	<!-- Only allow the SDK and administrators to have access to the incoming 
 		email endpoint -->
-	<!-- <security-constraint> <web-resource-collection> <url-pattern>/_ah/mail/*</url-pattern> 
-		<url-pattern>/_ah/xmpp/message/chat/</url-pattern> </web-resource-collection> 
-		<auth-constraint> <role-name>admin</role-name> </auth-constraint> </security-constraint> -->
-
+	<security-constraint>
+		<web-resource-collection>
+			<url-pattern>/_ah/mail/*</url-pattern>
+			<url-pattern>/_ah/xmpp/message/chat/</url-pattern>
+			<url-pattern>/cron/*</url-pattern>
+		</web-resource-collection> 
+		<auth-constraint>
+			<role-name>admin</role-name>
+		</auth-constraint>
+	</security-constraint>
+	
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
 	</welcome-file-list>
